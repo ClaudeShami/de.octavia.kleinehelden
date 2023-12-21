@@ -9,6 +9,15 @@
 		"description": "{{appDescription}}",
 		"applicationVersion": {
 			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/kleine-helden/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
 		}
 	},
 
@@ -50,6 +59,17 @@
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
 					"bundleName": "de.octavia.kleinehelden.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"autoExpandSelect": true,
+                    "earlyRequests": true,
+                    "operationMode": "Server",
+                    "synchronizationMode": "None",
+                    "groupId": "$auto"
 				}
 			}
 		},

@@ -1,25 +1,140 @@
-<mvc:View
+<mvc:View 
 	controllerName="de.octavia.kleinehelden.controller.Main"
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
 	core:require="{
 		formatter: 'de/octavia/kleinehelden/model/formatter'
 	}">
 
-	<MessagePage
-		title="{i18n>appTitle}"
-		text="{i18n>appTitle}"
-		icon="sap-icon://accept"
-		id="page"
-		description="{i18n>appDescription}">
-		<buttons>
-			<Button
-				id="helloButton"
-				text="{formatter: 'formatter.formatValue', path: 'i18n>btnText'}"
-				press="sayHello" />
-		</buttons>
-	</MessagePage>
-
+	<Page 
+		id="page" 
+		title="{viewModel>/title} - {viewModel>/titleCart} {viewModel>/cartCount}"
+		titleAlignment="Center">
+		<content>
+			<layout:FixFlex 
+				vertical="false"
+				fixContentSize="{= ${viewModel>/cartEmpty} ? '100%' : '75%'}">
+				<layout:fixContent>
+					<Page 
+						title="Buchkonfigurator"
+						titleAlignment="Center" >
+						<FlexBox 
+							class="sapUiSmallMargin" 
+							justifyContent="Center" 
+							alignItems="Stretch">
+							<form:Form
+								width="800px">
+								<form:layout>
+									<form:ResponsiveGridLayout 
+										columnsM="2"
+										columnsL="3"
+										columnsXL="4" />
+								</form:layout>
+								<form:formContainers>
+									<form:FormContainer >
+										<form:formElements>
+											<form:FormElement>
+												<form:label>
+													<Label text="Name" required="true"/>
+												</form:label>
+												<form:fields>
+													<Input 
+														id="bookproduct-name-input" 
+														value=""/>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Geschlecht" required="true"/>
+												</form:label>
+												<form:fields>
+													<RadioButtonGroup 
+														id="bookproduct-gender-radiobuttongroup">
+														<buttons>
+															<RadioButton text="Junge" />
+															<RadioButton text="Mädchen" />
+														</buttons>
+													</RadioButtonGroup>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Buchgröße" required="true"/>
+												</form:label>
+												<form:fields>
+													<Select 
+														id="bookproduct-size-select"
+														forceSelection="true">
+														<items>
+															<core:ListItem text="12x12" />
+															<core:ListItem text="20x20" />
+														</items>
+													</Select>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Geschichte" required="true"/>
+												</form:label>
+												<form:fields>
+													<Select 
+														id="bookproduct-story-select"
+														forceSelection="true">
+														<items>
+															<core:ListItem text="Abenteuer"/>
+															<core:ListItem text="Unterwasser"/>
+															<core:ListItem text="Weltraum"/>
+														</items>
+													</Select>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement >
+												<form:label>
+													<Label text="Widmung"/>
+												</form:label>
+												<form:fields>
+													<TextArea 
+														id="bookproduct-dedication-textarea"
+														editable="true"
+														rows="2"
+														growing="true">
+													</TextArea>
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:label>
+													<Label text="Als Geschenk verpacken"/>
+												</form:label>
+												<form:fields>
+													<CheckBox
+														id="bookproduct-gift-checkbox" 
+														text="(Zusatzkosten von 5€)" />
+												</form:fields>
+											</form:FormElement>
+											<form:FormElement>
+												<form:fields>
+													<HBox 
+														justifyContent="Center"
+														class="sapUiSmallMargin">
+														<Button 
+															text="Zum Warenkorb hinzufügen"
+															icon="sap-icon://cart-3"
+															press=".onAddToCart" />
+													</HBox>
+												</form:fields>
+											</form:FormElement>
+										</form:formElements>
+									</form:FormContainer>
+								</form:formContainers>
+							</form:Form>
+						</FlexBox>
+					</Page>
+				</layout:fixContent>
+			</layout:FixFlex>
+		</content>
+	</Page>
 </mvc:View>

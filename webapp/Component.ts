@@ -1,6 +1,7 @@
 import UIComponent from "sap/ui/core/UIComponent";
 import models from "./model/models";
 import Device from "sap/ui/Device";
+import JSONModel from "sap/ui/model/json/JSONModel";
 
 /**
  * @namespace de.octavia.kleinehelden
@@ -21,6 +22,16 @@ export default class Component extends UIComponent {
 
 		// create the views based on the url/hash
 		this.getRouter().initialize();
+
+		// create viewModel
+		this.setModel(new JSONModel({
+			"title": "Kleine Helden Shop",
+			"titleCart": "Warenkorb:",
+			"cart": [],
+			"cartEmpty": true,
+			"cartSum": 0,
+			"cartCount": 0
+		}), "viewModel");
 	}
 
 	/**
